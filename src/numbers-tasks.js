@@ -208,10 +208,7 @@ function isPrime(n) {
   if (n === 2) {
     return true;
   }
-  if (n % 2 === 0) {
-    return false;
-  }
-  for (let i = 3; i * i <= n; i += 2) {
+  for (let i = 2; i < n; i += 1) {
     if (n % i === 0) {
       return false;
     }
@@ -270,8 +267,25 @@ function getCube(num) {
  *   3  => 2
  *   10 => 55
  */
-function getFibonacciNumber(/* index */) {
-  throw new Error('Not implemented');
+function getFibonacciNumber(index) {
+  if (index < 0) {
+    return 0;
+  }
+  if (index === 0) {
+    return 0;
+  }
+  if (index === 1) {
+    return 1;
+  }
+  let f0 = 0;
+  let f1 = 1;
+  let nextNumFib = 0;
+  for (let i = 2; i <= index; i += 1) {
+    nextNumFib = f1 + f0;
+    f0 = f1;
+    f1 = nextNumFib;
+  }
+  return nextNumFib;
 }
 
 /**
@@ -285,8 +299,12 @@ function getFibonacciNumber(/* index */) {
  *   10 => 55 // (1+2+3+...+10)
  *   1  => 1
  */
-function getSumToN(/* n */) {
-  throw new Error('Not implemented');
+function getSumToN(n) {
+  let sum = 0;
+  for (let i = 1; i <= n; i += 1) {
+    sum += i;
+  }
+  return sum;
 }
 
 /**
@@ -300,8 +318,14 @@ function getSumToN(/* n */) {
  *   202 => 4  // (2+0+2)
  *   5   => 5  // 5
  */
-function getSumOfDigits(/* num */) {
-  throw new Error('Not implemented');
+function getSumOfDigits(num) {
+  let sum = 0;
+  let currentNum = Math.abs(num);
+  while (currentNum > 0) {
+    sum += currentNum % 10;
+    currentNum = Math.floor(currentNum / 10);
+  }
+  return sum;
 }
 
 /**
@@ -315,8 +339,15 @@ function getSumOfDigits(/* num */) {
  *   16  => true
  *   15  => false
  */
-function isPowerOfTwo(/* num */) {
-  throw new Error('Not implemented');
+function isPowerOfTwo(num) {
+  if (num <= 0) {
+    return false;
+  }
+  let anyNum = num;
+  while (anyNum % 2 === 0) {
+    anyNum /= 2;
+  }
+  return anyNum === 1;
 }
 
 /**
